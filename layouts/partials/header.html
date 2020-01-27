@@ -56,8 +56,8 @@
         &nbsp;Домой
       </a>
       {{ end }}
-      {{ with .RSSLink }}
-      <a href="{{ . }}" class="btn-header btn-subscribe hidden-xs">
+      {{ with .OutputFormats.Get "RSS" }}
+      <a href="{{ .RelPermalink }}" class="btn-header btn-subscribe hidden-xs">
         <i class="fa fa-rss" aria-hidden="true"></i>
         &nbsp;Подписка
       </a>
