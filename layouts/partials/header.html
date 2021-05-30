@@ -7,7 +7,7 @@
   {{ with .Site.Params.themecolor }}<meta name="theme-color" content="{{ . }}" />{{ end }}
   <meta property="og:site_name" content="{{ .Site.Title }}" />
   <meta property="og:url" content="{{ .Permalink }}" />
-  {{ with .Params.images }}{{ range first 5 . }}<meta property="og:image" content="{{ . }}" />{{ end }}{{ end }}
+  {{ with .Params.title_image }}<meta property="og:image" content="{{ . }}">{{ end }}
   {{ if .IsPage }}
     <meta property="og:type" content="article" />
     {{ with .Site.Params.facebook }}<meta property="og:article:author" content="https://facebook.com/{{ . }}" />{{ end }}
@@ -38,6 +38,17 @@
         {{ . }}
       </div>
       {{ end }}
+      <div class="cost-line">
+        {{ $fundCount := 0 }}
+        {{ range .Site.Pages }}
+          {{ $fund := .Params.cost }}
+          {{ with $fund }}
+            {{ $fundCount = add $fundCount $fund }}
+          {{ end }}
+        {{ end }}
+        Текущая cтоимость владения (без учета бензина):<br/>
+        <strong>{{ $fundCount }} руб.</strong>
+      </div>
       {{ partial "link.html" . }}
       {{ if ne .RelPermalink "/" }}
       <a href="{{ .Site.BaseURL }}" class="btn-header btn-back hidden-xs">

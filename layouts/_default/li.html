@@ -9,8 +9,18 @@
         </time>
       </div>
     </div>
+    {{ with .Params.cost }}
+    <div class="post-meta clearfix">
+      <div class="post-cost pull-left">
+        Потрачено: {{ . }} руб.
+      </div>
+    </div>
+    {{ end  }}
   </header>
   <div>
+    {{ with .Params.title_image }}
+      <img src="{{ . }}" />
+    {{ end }}
     {{ .Summary }}
   </div>
   {{ if .Truncated }}

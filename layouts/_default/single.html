@@ -13,12 +13,21 @@
         </time>
       </div>
     {{ end }}
+    {{ with .Params.tags }}
       <div class="pull-right">
-        {{ range .Params.tags }}
+        {{ range . }}
         <span class="post-tag small"><a href="{{ $baseurl }}/tags/{{ . | urlize }}">#{{ . }}</a></span>
         {{ end }}
       </div>
+    {{ end  }}
     </div>
+    {{ with .Params.cost }}
+    <div class="post-meta clearfix">
+      <div class="post-cost pull-left">
+        Потрачено: {{ . }} руб.
+      </div>
+    </div>
+    {{ end  }}
   </header>
   <section>
     {{ .Content }}
