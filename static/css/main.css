@@ -301,7 +301,7 @@ article section img, .article-list article > div img {
     height: auto;
     margin: 13px auto;
 }
-table td {
+table th, td {
     padding: 6px;
     border: 1px solid #E5E5E5;
 }
