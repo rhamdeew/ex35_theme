@@ -21,19 +21,79 @@
       </div>
     {{ end  }}
     </div>
-    {{ with .Params.cost }}
-    <div class="post-meta clearfix">
-      <div class="post-cost pull-left">
-        Потрачено: {{ . }} руб.
-      </div>
-    </div>
-    {{ end  }}
+    {{ if (isset .Params "total_cost") }}
+    <h4>Потрачено</h4>
+    <table class="table table-bordered">
+      <thead>
+      <tr class="active">
+        <th>На что</th>
+        <th>Сколько</th>
+      </tr>
+      </thead>
+      <tbody>
+        {{ with .Params.technical_fluids }}
+        <tr>
+          <td>Технические жидкости</td>
+          <td>{{ . }} руб.</td>
+        </tr>
+        {{ end  }}
+        {{ with .Params.tires }}
+        <tr>
+          <td>Шины</td>
+          <td>{{ . }} руб.</td>
+        </tr>
+        {{ end  }}
+        {{ with .Params.parts }}
+        <tr>
+          <td>Запчасти</td>
+          <td>{{ . }} руб.</td>
+        </tr>
+        {{ end  }}
+        {{ with .Params.insuarance }}
+        <tr>
+          <td>Страховка</td>
+          <td>{{ . }} руб.</td>
+        </tr>
+        {{ end  }}
+        {{ with .Params.transportation }}
+        <tr>
+          <td>Перевозка</td>
+          <td>{{ . }} руб.</td>
+        </tr>
+        {{ end  }}
+        {{ with .Params.incident }}
+        <tr>
+          <td>Инцидент</td>
+          <td>{{ . }} руб.</td>
+        </tr>
+        {{ end  }}
+        {{ with .Params.tax }}
+        <tr>
+          <td>Налог</td>
+          <td>{{ . }} руб.</td>
+        </tr>
+        {{ end  }}
+        {{ with .Params.work }}
+        <tr>
+          <td>Работа</td>
+          <td>{{ . }} руб.</td>
+        </tr>
+        {{ end  }}
+        {{ with .Params.total_cost }}
+        <tr class="active">
+          <td><strong>Сумма</strong></td>
+          <td><strong>{{ . }} руб.</strong></td>
+        </tr>
+        {{ end  }}
+      </tbody>
+    </table>
+    {{ end }}
   </header>
   <section>
     {{ .Content }}
   </section>
   <footer>
-    {{ if (isset .Params "nocomments")  }}
+    {{ if (isset .Params "nocomments") }}
     {{ else }}
     {{ with .Site.Params.disqus }}
     <hr/>

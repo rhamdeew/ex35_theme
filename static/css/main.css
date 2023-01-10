@@ -40,6 +40,25 @@ main {
     background: rgba(255, 255, 255, 0.6);
 }
 
+.header-text .cost-line a#cost-explained-link{
+    color: rgba(55, 55, 55, 0.7);
+    text-decoration: none;
+    border-bottom: 1px dotted;
+    cursor: pointer;
+}
+
+.header-text .cost-line a#cost-explained-link:hover {
+    text-decoration: none;
+}
+
+.header-text .cost-line #cost-explained {
+    background: rgb(255, 255, 255);
+    margin-top: 10px;
+}
+.header-text .cost-line #cost-explained td {
+    width: 50%;
+}
+
 .header-text .sns-links {
     margin: 20px auto;
     text-align: center;
