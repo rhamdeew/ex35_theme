@@ -1,5 +1,9 @@
+body {
+    font-family: 'Roboto', 'Open Sans', Arial, sans-serif;
+    font-weight: 300;
+    color: #4b4b4b;
+}
 main {
-    max-width: 750px;
     word-wrap: break-word;
 }
 
@@ -18,45 +22,6 @@ main {
     height: 100%;
     background-color: rgba(115, 115, 115, 0.4);
     color: rgba(55, 55, 55, 0.9);
-}
-
-.header-text .tag-line {
-    margin: 0 auto;
-    padding: 0 10px;
-    max-width: 430px;
-    color: rgba(55, 55, 55, 0.7);
-    text-align: center;
-    font-weight: 700;
-    background: rgba(255, 255, 255, 0.6);
-}
-
-.header-text .cost-line {
-    margin: 0 auto;
-    padding: 10px 10px 0 10px;
-    max-width: 430px;
-    color: rgba(55, 55, 55, 0.7);
-    text-align: center;
-    font-weight: 300;
-    background: rgba(255, 255, 255, 0.6);
-}
-
-.header-text .cost-line a#cost-explained-link{
-    color: rgba(55, 55, 55, 0.7);
-    text-decoration: none;
-    border-bottom: 1px dotted;
-    cursor: pointer;
-}
-
-.header-text .cost-line a#cost-explained-link:hover {
-    text-decoration: none;
-}
-
-.header-text .cost-line #cost-explained {
-    background: rgb(255, 255, 255);
-    margin-top: 10px;
-}
-.header-text .cost-line #cost-explained td {
-    width: 50%;
 }
 
 .header-text .sns-links {
@@ -84,17 +49,66 @@ main {
 }
 
 .header-text h1 {
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     text-align: center;
     font-weight: 200;
     display: block;
-    background: rgba(255, 255, 255, 0.6);
     max-width: 430px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .header-text h1 a {
     color: rgba(55, 55, 55, 1.0);
     text-decoration: none;
+}
+
+.header-text .header-block {
+    margin: 0 auto;
+    padding: 0 10px;
+    max-width: 430px;
+    background-color: #f0f0f0;
+    color: rgba(55, 55, 55, 0.7);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.header-text  .header-block .tag-line {
+    margin: 0 auto;
+    padding: 0 10px;
+    max-width: 430px;
+    color: rgba(55, 55, 55, 0.7);
+    text-align: center;
+    font-weight: 700;
+}
+
+.header-text .header-block .cost-line {
+    margin: 0 auto;
+    padding: 10px 10px 0 10px;
+    max-width: 430px;
+    color: rgba(55, 55, 55, 0.7);
+    text-align: center;
+    font-weight: 300;
+}
+
+.header-text .header-block .cost-line a#cost-explained-link{
+    color: rgba(55, 55, 55, 0.7);
+    text-decoration: none;
+    border-bottom: 1px dotted;
+    cursor: pointer;
+}
+
+.header-text .header-block .cost-line a#cost-explained-link:hover {
+    text-decoration: none;
+}
+
+.header-text .header-block .cost-line #cost-explained {
+    background: rgb(255, 255, 255);
+    margin-top: 10px;
+}
+.header-text .header-block .cost-line #cost-explained td {
+    width: 50%;
 }
 
 a.btn-header {
@@ -312,9 +326,41 @@ blockquote {
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: "Source Sans Pro", "Kozuka Gothic Pr6N", Meiryo, sans-serif !important;
+    font-family: 'Roboto', 'Open Sans', Arial, sans-serif;
 }
 
+h1, h2, h3 {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+article > header {
+    margin-bottom: 20px;
+}
+article > header .post-meta {
+    margin: 0;
+}
+article > header h1 {
+    color: #444;
+}
+article > header h2 a {
+    color: #444;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    display: inline;
+}
+article > header h2 a:hover {
+    background-color: #444;
+    color: #fff;
+}
+article > section {
+    font-size: 1.1em;
+}
+article .published, article .spent {
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
 article section img, .article-list article > div img {
     max-width: 100%;
     height: auto;
@@ -323,4 +369,8 @@ article section img, .article-list article > div img {
 table th, td {
     padding: 6px;
     border: 1px solid #E5E5E5;
+    font-weight: 400;
+}
+.text-primary {
+    color: #111;
 }

@@ -20,11 +20,12 @@
 
   <title>{{ if (or (.IsPage) (.IsSection)) }}{{ .Title }} &middot; {{ end }} {{ .Site.Title }}</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/bootstrap.min.css" />
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/main.css" />
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/font-awesome.min.css" />
-  <link rel="stylesheet" href="{{ .Site.BaseURL }}css/github.css" />
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
   <link rel="shortcut icon" href="{{ .Site.BaseURL }}images/favicon.ico" />
   <link rel="apple-touch-icon" href="{{ .Site.BaseURL }}images/apple-touch-icon.png" />
   {{ with .OutputFormats.Get "RSS" }}<link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />{{ end }}
@@ -32,113 +33,115 @@
 <body>
     <header class="global-header"  style="background-image:url({{ if isset .Params "image" }}{{ .Params.image }} {{ else }} /images/bg.jpg {{ end }})">
     <section class="header-text">
-      <h1><a href="{{ .Site.BaseURL }}">EX35</a></h1>
-      {{ with .Site.Params.subtitle }}
-      <div class="tag-line">
-        {{ . }}
-      </div>
-      {{ end }}
-      <div class="cost-line">
-        {{ $fundCount := 0 }}
-        {{ range .Site.Pages }}
-          {{ $fund := .Params.total_cost }}
-          {{ with $fund }}
-            {{ $fundCount = add $fundCount $fund }}
-          {{ end }}
+      <h1><a href="{{ .Site.BaseURL }}">Infiniti EX35</a></h1>
+      <div class="header-block">
+        {{ with .Site.Params.subtitle }}
+        <div class="tag-line">
+          {{ . }}
+        </div>
         {{ end }}
-        Текущая cтоимость владения (без учета бензина):<br/>
-        <a id="cost-explained-link" onclick="toggleCostExplainedBlock()"><strong>{{ $fundCount }} руб.</strong></a>
-        <div id="cost-explained" style="display:none;">
-          <table class="table">
-            {{ $technicalFluidsFundCount := 0 }}
-            {{ $tiresFundCount := 0 }}
-            {{ $partsFundCount := 0 }}
-            {{ $insuaranceFundCount := 0 }}
-            {{ $transportationFundCount := 0 }}
-            {{ $incidentFundCount := 0 }}
-            {{ $taxFundCount := 0 }}
-            {{ $workFundCount := 0 }}
-            {{ range .Site.Pages }}
-              {{ $fund := .Params.technical_fluids }}
-              {{ with $fund }}
-                {{ $technicalFluidsFundCount = add $technicalFluidsFundCount $fund }}
-              {{ end }}
+        <div class="cost-line">
+          {{ $fundCount := 0 }}
+          {{ range .Site.Pages }}
+            {{ $fund := .Params.total_cost }}
+            {{ with $fund }}
+              {{ $fundCount = add $fundCount $fund }}
             {{ end }}
-            <tr>
-              <td>Технические жидкости</td>
-              <td>{{ $technicalFluidsFundCount }} руб.</td>
-            </tr>
-            {{ range .Site.Pages }}
-              {{ $fund := .Params.tires }}
-              {{ with $fund }}
-                {{ $tiresFundCount = add $tiresFundCount $fund }}
+          {{ end }}
+          Текущая cтоимость владения (без учета бензина):<br/>
+          <a id="cost-explained-link" onclick="toggleCostExplainedBlock()"><strong>{{ $fundCount }} руб.</strong></a>
+          <div id="cost-explained" style="display:none;">
+            <table class="table">
+              {{ $technicalFluidsFundCount := 0 }}
+              {{ $tiresFundCount := 0 }}
+              {{ $partsFundCount := 0 }}
+              {{ $insuaranceFundCount := 0 }}
+              {{ $transportationFundCount := 0 }}
+              {{ $incidentFundCount := 0 }}
+              {{ $taxFundCount := 0 }}
+              {{ $workFundCount := 0 }}
+              {{ range .Site.Pages }}
+                {{ $fund := .Params.technical_fluids }}
+                {{ with $fund }}
+                  {{ $technicalFluidsFundCount = add $technicalFluidsFundCount $fund }}
+                {{ end }}
               {{ end }}
-            {{ end }}
-            <tr>
-              <td>Шины</td>
-              <td>{{ $tiresFundCount }} руб.</td>
-            </tr>
-            {{ range .Site.Pages }}
-              {{ $fund := .Params.parts }}
-              {{ with $fund }}
-                {{ $partsFundCount = add $partsFundCount $fund }}
+              <tr>
+                <td>Технические жидкости</td>
+                <td>{{ $technicalFluidsFundCount }} руб.</td>
+              </tr>
+              {{ range .Site.Pages }}
+                {{ $fund := .Params.tires }}
+                {{ with $fund }}
+                  {{ $tiresFundCount = add $tiresFundCount $fund }}
+                {{ end }}
               {{ end }}
-            {{ end }}
-            <tr>
-              <td>Запчасти</td>
-              <td>{{ $partsFundCount }} руб.</td>
-            </tr>
-            {{ range .Site.Pages }}
-              {{ $fund := .Params.insuarance }}
-              {{ with $fund }}
-                {{ $insuaranceFundCount = add $insuaranceFundCount $fund }}
+              <tr>
+                <td>Шины</td>
+                <td>{{ $tiresFundCount }} руб.</td>
+              </tr>
+              {{ range .Site.Pages }}
+                {{ $fund := .Params.parts }}
+                {{ with $fund }}
+                  {{ $partsFundCount = add $partsFundCount $fund }}
+                {{ end }}
               {{ end }}
-            {{ end }}
-            <tr>
-              <td>Страховка</td>
-              <td>{{ $insuaranceFundCount }} руб.</td>
-            </tr>
-            {{ range .Site.Pages }}
-              {{ $fund := .Params.transportation }}
-              {{ with $fund }}
-                {{ $transportationFundCount = add $transportationFundCount $fund }}
+              <tr>
+                <td>Запчасти</td>
+                <td>{{ $partsFundCount }} руб.</td>
+              </tr>
+              {{ range .Site.Pages }}
+                {{ $fund := .Params.insuarance }}
+                {{ with $fund }}
+                  {{ $insuaranceFundCount = add $insuaranceFundCount $fund }}
+                {{ end }}
               {{ end }}
-            {{ end }}
-            <tr>
-              <td>Транспортировка</td>
-              <td>{{ $transportationFundCount }} руб.</td>
-            </tr>
-            {{ range .Site.Pages }}
-              {{ $fund := .Params.incident }}
-              {{ with $fund }}
-                {{ $incidentFundCount = add $incidentFundCount $fund }}
+              <tr>
+                <td>Страховка</td>
+                <td>{{ $insuaranceFundCount }} руб.</td>
+              </tr>
+              {{ range .Site.Pages }}
+                {{ $fund := .Params.transportation }}
+                {{ with $fund }}
+                  {{ $transportationFundCount = add $transportationFundCount $fund }}
+                {{ end }}
               {{ end }}
-            {{ end }}
-            <tr>
-              <td>Происшествия</td>
-              <td>{{ $incidentFundCount }} руб.</td>
-            </tr>
-            {{ range .Site.Pages }}
-              {{ $fund := .Params.tax }}
-              {{ with $fund }}
-                {{ $taxFundCount = add $taxFundCount $fund }}
+              <tr>
+                <td>Транспортировка</td>
+                <td>{{ $transportationFundCount }} руб.</td>
+              </tr>
+              {{ range .Site.Pages }}
+                {{ $fund := .Params.incident }}
+                {{ with $fund }}
+                  {{ $incidentFundCount = add $incidentFundCount $fund }}
+                {{ end }}
               {{ end }}
-            {{ end }}
-            <tr>
-              <td>Налоги</td>
-              <td>{{ $taxFundCount }} руб.</td>
-            </tr>
-            {{ range .Site.Pages }}
-              {{ $fund := .Params.work }}
-              {{ with $fund }}
-                {{ $workFundCount = add $workFundCount $fund }}
+              <tr>
+                <td>Происшествия</td>
+                <td>{{ $incidentFundCount }} руб.</td>
+              </tr>
+              {{ range .Site.Pages }}
+                {{ $fund := .Params.tax }}
+                {{ with $fund }}
+                  {{ $taxFundCount = add $taxFundCount $fund }}
+                {{ end }}
               {{ end }}
-            {{ end }}
-            <tr>
-              <td>Работы</td>
-              <td>{{ $workFundCount }} руб.</td>
-            </tr>
-          </table>
+              <tr>
+                <td>Налоги</td>
+                <td>{{ $taxFundCount }} руб.</td>
+              </tr>
+              {{ range .Site.Pages }}
+                {{ $fund := .Params.work }}
+                {{ with $fund }}
+                  {{ $workFundCount = add $workFundCount $fund }}
+                {{ end }}
+              {{ end }}
+              <tr>
+                <td>Работы</td>
+                <td>{{ $workFundCount }} руб.</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
       {{ partial "link.html" . }}
