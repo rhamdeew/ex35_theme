@@ -55,7 +55,7 @@
               {{ $technicalFluidsFundCount := 0 }}
               {{ $tiresFundCount := 0 }}
               {{ $partsFundCount := 0 }}
-              {{ $insuaranceFundCount := 0 }}
+              {{ $insuranceFundCount := 0 }}
               {{ $transportationFundCount := 0 }}
               {{ $incidentFundCount := 0 }}
               {{ $taxFundCount := 0 }}
@@ -91,14 +91,14 @@
                 <td>{{ $partsFundCount }} руб.</td>
               </tr>
               {{ range .Site.Pages }}
-                {{ $fund := .Params.insuarance }}
+                {{ $fund := .Params.insurance }}
                 {{ with $fund }}
-                  {{ $insuaranceFundCount = add $insuaranceFundCount $fund }}
+                  {{ $insuranceFundCount = add $insuranceFundCount $fund }}
                 {{ end }}
               {{ end }}
               <tr>
                 <td>Страховка</td>
-                <td>{{ $insuaranceFundCount }} руб.</td>
+                <td>{{ $insuranceFundCount }} руб.</td>
               </tr>
               {{ range .Site.Pages }}
                 {{ $fund := .Params.transportation }}
