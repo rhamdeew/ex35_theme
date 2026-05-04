@@ -3,22 +3,59 @@
 <head prefix="og: http://ogp.me/ns#">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-  <meta property="og:title" content="{{ if .IsPage }} {{ .Title }} &middot; {{ end }} {{ .Site.Title }}" />
+
+  {{- $pageTitle := .Site.Title -}}
+  {{- if (or (.IsPage) (.IsSection)) }}{{ $pageTitle = printf "%s · %s" .Title .Site.Title }}{{ end -}}
+  {{- $pageDesc := .Site.Params.description -}}
+  {{- if .Params.description }}{{ $pageDesc = .Params.description }}{{ end -}}
+  {{- $ogImage := .Site.Params.default_og_image -}}
+  {{- if .Params.title_image }}{{ $ogImage = .Params.title_image }}{{ end -}}
+
+  <title>{{ $pageTitle }}</title>
+  <meta name="description" content="{{ $pageDesc }}" />
+  <meta name="author" content="{{ .Site.Params.Author.name }}" />
+  <link rel="canonical" href="{{ .Permalink }}" />
+
   {{ with .Site.Params.themecolor }}<meta name="theme-color" content="{{ . }}" />{{ end }}
+
+  <meta property="og:title" content="{{ $pageTitle }}" />
+  <meta property="og:description" content="{{ $pageDesc }}" />
   <meta property="og:site_name" content="{{ .Site.Title }}" />
   <meta property="og:url" content="{{ .Permalink }}" />
-  {{ with .Params.title_image }}<meta property="og:image" content="{{ . }}">{{ end }}
+  <meta property="og:locale" content="ru_RU" />
+  {{ with $ogImage }}<meta property="og:image" content="{{ $.Site.BaseURL }}{{ strings.TrimPrefix "/" . }}">{{ end }}
+
   {{ if (or (.IsPage) (.IsSection)) }}
     <meta property="og:type" content="article" />
-    {{ with .Site.Params.facebook }}<meta property="og:article:author" content="https://facebook.com/{{ . }}" />{{ end }}
     <meta property="og:article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}" />
     {{ range .Params.tags }}<meta property="og:article:tag" content="{{ . }}" />{{ end }}
-    <meta name="description" content="{{ .Params.description }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ $pageTitle }}" />
+    <meta name="twitter:description" content="{{ $pageDesc }}" />
+    {{ with $ogImage }}<meta name="twitter:image" content="{{ $.Site.BaseURL }}{{ strings.TrimPrefix "/" . }}">{{ end }}
+    {{- $ldAuthor := dict "@type" "Person" "name" .Site.Params.Author.name -}}
+    {{- $ldPublisher := dict "@type" "Organization" "name" .Site.Title -}}
+    {{- $ld := dict
+      "@context" "https://schema.org"
+      "@type" "BlogPosting"
+      "headline" .Title
+      "description" $pageDesc
+      "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+      "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+      "author" $ldAuthor
+      "publisher" $ldPublisher
+      "url" .Permalink
+    -}}
+    {{- if $ogImage -}}
+      {{- $ld = merge $ld (dict "image" (printf "%s%s" $.Site.BaseURL (strings.TrimPrefix "/" $ogImage))) -}}
+    {{- end -}}
+    {{ printf "<script type=\"application/ld+json\">%s</script>" ($ld | jsonify) | safeHTML }}
   {{ else }}
     <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{ $pageTitle }}" />
+    <meta name="twitter:description" content="{{ $pageDesc }}" />
   {{ end }}
-
-  <title>{{ if (or (.IsPage) (.IsSection)) }}{{ .Title }} &middot; {{ end }} {{ .Site.Title }}</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

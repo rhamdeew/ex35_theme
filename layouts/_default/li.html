@@ -19,7 +19,7 @@
   </header>
   <div>
     {{ with .Params.title_image }}
-      <img src="{{ . }}" />
+      <img src="{{ . }}" alt="{{ $.Title }}" />
     {{ end }}
     {{ .Summary }}
   </div>
